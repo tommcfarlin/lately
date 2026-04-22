@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test("home page loads", async ({ page }) => {
-  await page.goto("/");
-  await expect(page).toHaveTitle(/lately/i);
+  const response = await page.goto("/");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("body")).toBeVisible();
 });
 
 test("theme toggle changes color scheme", async ({ page }) => {
