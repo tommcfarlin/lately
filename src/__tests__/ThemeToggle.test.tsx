@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -35,16 +35,20 @@ beforeEach(() => {
 });
 
 describe("ThemeToggle", () => {
-  it("toggles dark class on html element when clicked", () => {
-    render(<ThemeToggle />);
+  it("toggles dark class on html element when clicked", async () => {
+    await act(async () => {
+      render(<ThemeToggle />);
+    });
     const button = screen.getByRole("button", { name: /toggle color scheme/i });
     expect(document.documentElement.classList.contains("dark")).toBe(false);
     fireEvent.click(button);
     expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 
-  it("persists theme preference to localStorage", () => {
-    render(<ThemeToggle />);
+  it("persists theme preference to localStorage", async () => {
+    await act(async () => {
+      render(<ThemeToggle />);
+    });
     const button = screen.getByRole("button", { name: /toggle color scheme/i });
     fireEvent.click(button);
     expect(localStorageMock.getItem("theme")).toBe("dark");
