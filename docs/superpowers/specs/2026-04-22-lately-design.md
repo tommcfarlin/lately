@@ -285,7 +285,9 @@ Per PRD §UI & Layout. Highlights:
 
 ## 12. Environment Variables
 
-Net changes from PRD: **remove** `LATELY_USER_ID` and `LATELY_FEED_PASSWORD`; **add** `LATELY_OWNER_EMAIL`.
+Net changes from PRD: **remove** `LATELY_USER_ID`, `LATELY_FEED_PASSWORD`, and `LATELY_USERNAME`; **add** `LATELY_OWNER_EMAIL`.
+
+Rule of thumb for this self-hosted app: every env var should answer a question only the user can answer themselves. `LATELY_USERNAME` was redundant with `LATELY_SITE_TITLE` (which already carries the owner's display name / branding) and served no route or functional purpose.
 
 | Variable | Required | Description |
 |---|---|---|
@@ -295,7 +297,6 @@ Net changes from PRD: **remove** `LATELY_USER_ID` and `LATELY_FEED_PASSWORD`; **
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes | Same as `SUPABASE_URL`, browser-exposed. |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Same as `SUPABASE_ANON_KEY`, browser-exposed. |
 | `TMDB_API_KEY` | Yes | TMDB read access token. |
-| `LATELY_USERNAME` | Yes | URL slug / handle. |
 | `LATELY_OWNER_EMAIL` | Yes | Owner's email. Determines `isOwner`. |
 | `LATELY_SITE_TITLE` | Yes | Display name in header. |
 | `LATELY_SUBTITLE` | Yes | One-line subtitle. |
